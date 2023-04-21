@@ -1,0 +1,11 @@
+div.header-form {
+  padding: 1rem;
+  background-color: #fffdf8;
+}
+
+.countup-cards {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}

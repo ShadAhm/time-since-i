@@ -1,0 +1,21 @@
+div.card {
+    padding:1rem;
+    border-radius: 1%;
+    border:1px solid #c6c5c2;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+span.countdown-sentence {
+    font-size: larger;
+}
+
+span.countdown-unit {
+    margin-right: 4pt;
+
+    span.number {
+        font-size: x-large;
+        font-weight: 500;
+    }
+}
