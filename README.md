@@ -9,4 +9,4 @@ Demo: https://shadahm.github.io/time-since-i
 
 Primary reason was just to learn React.
 
-And also I use an app on my phone for tracking how long it has been since I quit smoking. But as an aspiring (and failing a lot!) vegetarian, I also want to keep track of how long it has been since I last ate meat. Most app I found only allow keeping track of the one thing, so I had to install 2 quit-smoking apps just to do this. Therefore this app can handle multiple count-ups.
+Second, I needed an app that could track multiple count-ups for different goals. For example, I quit smoking a while ago and I use an app to see how long I have been smoke-free. I also try to (very often failing) follow a vegetarian diet. I wanted an app that could show me how long it has been since I ate meat as well. Most of the apps I found were designed for only one count-up, so I decided to make my own app that could handle multiple ones.
