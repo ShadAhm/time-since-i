@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './CountupCard.scss';
 
 interface CountupCardProps {
-  key: number;
+  countdownId: string;
   title: string;
   startDate: Date;
+  onRemove: (key: string) => void;
 }
 
 function CountupCard(input: CountupCardProps) {
@@ -25,9 +26,13 @@ function CountupCard(input: CountupCardProps) {
   const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
+  const handleRemove = () => {
+    input.onRemove(input.countdownId);
+  };
+
   return (
     <div className='card'>
-      <button type='button' className="cross-button" title='Remove card'><span aria-hidden="true">×</span></button>
+      <button type='button' className="cross-button" title='Remove card' onClick={handleRemove}><span aria-hidden="true">×</span></button>
       <div className="card-body">
         <p>It has been</p>
         <div className='countdown-sentence'>
