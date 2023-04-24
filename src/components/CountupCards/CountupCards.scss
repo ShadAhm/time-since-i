@@ -6,6 +6,6 @@ div.header-form {
 .countup-cards {
   margin: 1rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }

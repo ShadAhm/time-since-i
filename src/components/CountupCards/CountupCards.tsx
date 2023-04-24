@@ -4,7 +4,7 @@ import './CountupCards.scss';
 import AddNew from '../AddNew/AddNew';
 
 function CountupCards() {
-    const [countdowns, setCountdowns] = useState([{ title: 'smoked a cigarette', startDate: new Date() }, { title: 'eat a salmon', startDate: new Date('2020-02-03') }]);
+    const [countdowns, setCountdowns] = useState([{ title: 'smoked a cigarette', startDate: new Date('2021-12-12') }, { title: 'last ate meat', startDate: new Date('2021-10-24') }]);
 
     function addToCountdowns(title: string, startDate: string) {
         setCountdowns(prevCountdowns => {

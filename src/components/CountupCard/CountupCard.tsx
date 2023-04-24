@@ -27,14 +27,17 @@ function CountupCard(input: CountupCardProps) {
 
   return (
     <div className='card'>
-      <p>It has been</p>
-      <div className='countdown-sentence'>
-        {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> days </span>}
-        {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> hours </span>}
-        {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> minutes </span>}
-        <span className='countdown-unit'><span className="number">{seconds}</span> seconds </span>
+      <button type='button' className="cross-button" title='Remove card'><span aria-hidden="true">×</span></button>
+      <div className="card-body">
+        <p>It has been</p>
+        <div className='countdown-sentence'>
+          {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> days </span>}
+          {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> hours </span>}
+          {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> minutes </span>}
+          <span className='countdown-unit'><span className="number">{seconds}</span> seconds </span>
+        </div>
+        <p>since you {input.title}</p>
       </div>
-      <p>since you {input.title}</p>
     </div>
   );
 }
