@@ -30,6 +30,10 @@ function CountupCard(input: CountupCardProps) {
     input.onRemove(input.countdownId);
   };
 
+  const handleRemove = () => {
+    input.onRemove(input.countdownId);
+  };
+
   return (
     <div className='card'>
       <button type='button' className="cross-button" title='Remove card' onClick={handleRemove}><span aria-hidden="true">×</span></button>

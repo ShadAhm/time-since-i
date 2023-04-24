@@ -26,10 +26,9 @@ function CountupCards() {
         });
     }
 
-    function removeFromCountdowns(whichId: string) {
-        setCountdowns(prevCountdowns => {
-            return prevCountdowns.filter((countdown, key) => countdown.id !== whichId);
-        });
+=======
+        })
+>>>>>>> 61e7963 (Allow removal of countdowns)
     }
 
     return (
