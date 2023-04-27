@@ -9,7 +9,7 @@ interface CountupCardProps {
 }
 
 function CountupCard(input: CountupCardProps) {
-  const [countUpDate, setCountUpDate] = useState(input.startDate.getTime());
+  const [countUpDate, setCountUpDate] = useState(new Date(input.startDate).getTime());
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
