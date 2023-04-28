@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.scss';
 import CountupCards from './components/CountupCards/CountupCards';
-import AddNew from './components/AddNew/AddNew';
 
 function App() {
   return (

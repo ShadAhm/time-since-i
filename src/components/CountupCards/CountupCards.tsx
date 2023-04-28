@@ -6,10 +6,14 @@ import { LocalStorageUpdater } from '../AddNew/LocalStorageUpdater';
 import { CountUp } from './CountupModel';
 
 function CountupCards() {
-    const localStorageUpdater = new LocalStorageUpdater();
-    const [countdowns, setCountdowns] = useState<CountUp[]>(localStorageUpdater.getLocalStorage());
+    
+    const [countdowns, setCountdowns] = useState<CountUp[]>(() => { 
+        const localStorageUpdater = new LocalStorageUpdater();
+        return localStorageUpdater.getLocalStorage() 
+    });
 
     useEffect(() => {
+        const localStorageUpdater = new LocalStorageUpdater();
         localStorageUpdater.updateLocalStorage(JSON.stringify(countdowns));
     }, [countdowns]);
 
