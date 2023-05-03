@@ -9,3 +9,10 @@ div.header-form {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
+@media (width < 768px) {
+  .countup-cards {
+    grid-template-columns: 1fr;
+    margin: 0.5rem 0;
+  }
+}

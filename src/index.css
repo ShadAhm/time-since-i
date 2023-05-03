@@ -6,7 +6,33 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(250, 248, 244);
-  color:rgb(35 39 47)
+  color:rgb(35 39 47);
+}
+
+div#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 95vh;
+} 
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+  text-align: center;
+  font-size: x-small;
+  color: #757575,
+}
+
+a {
+  color: #757575;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 code {
@@ -27,3 +53,4 @@ h1 {
   5px 5px 1px #312F2C,
   6px 6px 1px #fff;
 }
+
