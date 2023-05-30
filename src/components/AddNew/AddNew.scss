@@ -10,7 +10,8 @@
 
     input {
         border: 1px solid #c6c5c2;
-        padding: 6px;
+        padding: 0.5em;
+        border-radius: 3px;
     }
 
     input[type=submit] {
@@ -19,5 +20,17 @@
         color: white;
         padding: 6px 10px;
         cursor: pointer;
-     }
+        border-radius: 3px;
+    }
+}
+
+@media (width < 768px) {
+    #addNewForm {
+        display:flex;
+        flex-wrap: wrap;
+
+        div.form-input,input {
+            margin: 4px;
+        }
+    }
 }

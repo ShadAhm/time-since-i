@@ -37,7 +37,7 @@ function AddNew(props: AddNewProps) {
             </div>
             <div className="form-input">
                 <label htmlFor="lastDate">was at:</label>
-                <input type="date" id="lastDate" name="lastDate" value={inputValues.lastDate} onChange={handleChange} />
+                <input type="datetime-local" id="lastDate" name="lastDate" value={inputValues.lastDate} onChange={handleChange} />
             </div>
             <input type="submit" value="Add" />
         </form>
