@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AddNew.scss';
 
 interface AddNewProps {
@@ -15,7 +15,7 @@ function AddNew(props: AddNewProps) {
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        if(inputValues.lastTime == null || inputValues.lastTime == '') {
+        if(inputValues.lastTime === null || inputValues.lastTime === '') {
             alert('The last time you did what?');
             return;
         }

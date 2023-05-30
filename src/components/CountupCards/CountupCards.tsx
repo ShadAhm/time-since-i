@@ -6,10 +6,10 @@ import { LocalStorageUpdater } from '../AddNew/LocalStorageUpdater';
 import { CountUp } from './CountupModel';
 
 function CountupCards() {
-    
-    const [countdowns, setCountdowns] = useState<CountUp[]>(() => { 
+
+    const [countdowns, setCountdowns] = useState<CountUp[]>(() => {
         const localStorageUpdater = new LocalStorageUpdater();
-        return localStorageUpdater.getLocalStorage() 
+        return localStorageUpdater.getLocalStorage()
     });
 
     useEffect(() => {
@@ -26,11 +26,12 @@ function CountupCards() {
         });
     }
 
-=======
-        })
->>>>>>> 61e7963 (Allow removal of countdowns)
+    function removeFromCountdowns(id: string) {
+        setCountdowns(prevCountdowns => {
+            return prevCountdowns.filter(countdown => countdown.id !== id);
+        });
     }
-
+    
     return (
         <>
             <div className="header-form">

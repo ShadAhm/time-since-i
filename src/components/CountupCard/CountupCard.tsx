@@ -30,10 +30,6 @@ function CountupCard(input: CountupCardProps) {
     input.onRemove(input.countdownId);
   };
 
-  const handleRemove = () => {
-    input.onRemove(input.countdownId);
-  };
-
   return (
     <div className='card'>
       <button type='button' className="cross-button" title='Remove card' onClick={handleRemove}><span aria-hidden="true">×</span></button>
@@ -44,7 +40,7 @@ function CountupCard(input: CountupCardProps) {
           {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> days </span>}
           {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> hours </span>}
           {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> minutes </span>}
-          {minutes == 0 && <span className='countdown-unit'><span className="number">less than a minute</span></span>}
+          {minutes === 0 && <span className='countdown-unit'><span className="number">less than a minute</span></span>}
         </div>
         <p>since you {input.title}</p>
       </div>
