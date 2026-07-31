@@ -1,4 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import {
+  addDays,
+  addHours,
+  addMonths,
+  addYears,
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInMonths,
+  differenceInYears,
+  parseISO,
+} from 'date-fns';
 import './CountupCard.scss';
 
 interface CountupCardProps {
@@ -9,22 +21,35 @@ interface CountupCardProps {
 }
 
 function CountupCard(input: CountupCardProps) {
-  const [countUpDate, setCountUpDate] = useState(new Date(input.startDate).getTime());
-  const [elapsed, setElapsed] = useState(0);
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const timeElapsed = now - countUpDate;
-      setElapsed(timeElapsed);
-    }, 1000);
+    const interval = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(interval);
-  }, [countUpDate]);
+  }, []);
 
-  const years = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 365));
-  const days = Math.floor((elapsed % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+  const startDar = typeof input.startDate === 'string'
+    ? parseISO(input.startDate)
+    : input.startDate;
+
+  const years = differenceInYears(now, startDar);
+  const afterYears = addYears(startDar, years);
+  const yearWord = years === 1 ? 'year' : 'years';
+
+  const months = differenceInMonths(now, afterYears);
+  const afterMonths = addMonths(afterYears, months);
+  const monthWord = months === 1 ? 'month' : 'months';
+
+  const days = differenceInDays(now, afterMonths);
+  const afterDays = addDays(afterMonths, days);
+  const dayWord = days === 1 ? 'day' : 'days';
+
+  const hours = differenceInHours(now, afterDays);
+  const afterHours = addHours(afterDays, hours);
+  const hourWord = hours === 1 ? 'hour' : 'hours';
+
+  const minutes = differenceInMinutes(now, afterHours);
+  const minuteWord = minutes === 1 ? 'minute' : 'minutes';
 
   const handleRemove = () => {
     input.onRemove(input.countdownId);
@@ -36,10 +61,11 @@ function CountupCard(input: CountupCardProps) {
       <div className="card-body">
         <p>It has been</p>
         <div className='countdown-sentence'>
-          {years > 0 && <span className='countdown-unit'><span className="number">{years}</span> years </span>}
-          {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> days </span>}
-          {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> hours </span>}
-          {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> minutes </span>}
+          {years > 0 && <span className='countdown-unit'><span className="number">{years}</span> {yearWord} </span>}
+          {months > 0 && <span className='countdown-unit'><span className="number">{months}</span> {monthWord} </span>}
+          {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> {dayWord} </span>}
+          {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> {hourWord} </span>}
+          {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> {minuteWord} </span>}
           {minutes === 0 && <span className='countdown-unit'><span className="number">less than a minute</span></span>}
         </div>
         <p>since you {input.title}</p>
