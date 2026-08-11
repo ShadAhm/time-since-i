@@ -1,49 +1,146 @@
-div.card {
-    padding: 1rem;
-    border-radius: 1%;
-    border: 1px solid #c6c5c2;
-    background-color: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition-accent);
 
-    div.card-body {
-        text-align: center;
-    }
+  // The tier signal. A hairline rule across the top edge rather than a tinted
+  // card — colour stays a mark, not a wash.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: background-color var(--transition-accent);
+  }
+
+  &:hover {
+    border-color: var(--hairline-strong);
+  }
 }
 
-button.cross-button {
-    cursor: pointer;
-    float: right;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #c6c5c2;
-    text-shadow: 0 1px 0 #fff;
-    opacity: .5;
-    background-color: transparent;
-    border: none;
-
-    :hover {
-        opacity: 1;
-        color: #000;
-    }
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 22px;
 }
 
-span.countdown-sentence {
-    font-size: larger;
+.card-tier {
+  padding: 2px var(--space-2);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-ink);
+  background-color: var(--accent-soft);
+  border-radius: var(--radius-pill);
+  transition: color var(--transition-accent),
+    background-color var(--transition-accent);
 }
 
-span.countdown-unit {
-    margin-right: 4pt;
+.card-remove {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--ink-muted);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease, opacity 150ms ease;
 
-    span.number {
-        font-size: x-large;
-        font-weight: 500;
-    }
+  &:hover {
+    color: var(--ink);
+    border-color: var(--hairline-strong);
+  }
 }
 
-p.card-date {
-    margin-top: 0.55rem;
-    font-size: 0.65rem;
-    color: #6b7280;
-    text-transform: uppercase;
+// 24px clears the AA minimum target size, but it is fiddly under a thumb.
+@media (pointer: coarse) {
+  .card-remove {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// Fade the remove control in on hover, but only where hovering is possible —
+// on touch there is no hover state to reveal it, so it stays visible.
+@media (hover: hover) {
+  .card-remove {
+    opacity: 0;
+  }
+
+  .card:hover .card-remove,
+  .card-remove:focus-visible {
+    opacity: 1;
+  }
+}
+
+.card-body {
+  flex: 1 0 auto;
+}
+
+.card-eyebrow {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+
+.card-count {
+  margin: var(--space-1) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-2);
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.count-unit {
+  white-space: nowrap;
+}
+
+.count-number {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  // The card re-renders every second; tabular figures keep the digits from
+  // reflowing as their widths change.
+  font-variant-numeric: tabular-nums;
+}
+
+.card-title {
+  margin: var(--space-3) 0 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.card-date {
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  // --ink-faint would land at ~3.6:1 here, which is short of the 4.5:1 this
+  // text needs at 11px.
+  color: var(--ink-muted);
 }

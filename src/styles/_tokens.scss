@@ -1,0 +1,160 @@
+// Design tokens. Everything visual resolves through these — components should
+// never hard-code a colour or a spacing value.
+//
+// These are CSS custom properties rather than Sass variables on purpose: the
+// milestone tiers reassign --accent* at runtime via [data-milestone], and dark
+// mode is a single override block.
+
+:root {
+  // Surfaces — warm paper, not neutral grey.
+  --canvas: #f6f4f0;
+  --surface: #ffffff;
+  --surface-sunken: #efece6;
+
+  // Ink
+  --ink: #1b1a18;
+  --ink-muted: #6d6960;
+  --ink-faint: #96918a;
+
+  // Lines. Hairlines carry the structure here; there are no drop shadows.
+  --hairline: #e3dfd7;
+  --hairline-strong: #cfc9be;
+
+  // A warm rust rather than a pure red — pure red is the only thing in the
+  // palette that would look imported from somewhere else.
+  --form-error: #a2402c;
+
+  // The one lifted surface in the app (the modal) needs a shadow to read as
+  // floating above the page — it is the deliberate exception.
+  --overlay: rgba(27, 26, 24, 0.32);
+  --shadow-modal: 0 24px 60px -20px rgba(27, 26, 24, 0.35);
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 20px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', sans-serif;
+
+  --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--ink);
+
+  --transition-accent: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  // The wordmark's layered-shadow logotype. Kept separate from --ink and
+  // --accent because it's a fixed brand mark, not a themed surface — the
+  // outline stays a constant dark charcoal in both colour schemes rather
+  // than following text colour, otherwise it vanishes against dark canvas.
+  --logo-fill: #ffffff;
+  --logo-outline: #2b2a26;
+  --logo-accent: #ac8e00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #171614;
+    --surface: #201f1c;
+    --surface-sunken: #14130f;
+
+    --ink: #edeae4;
+    --ink-muted: #9a958c;
+    --ink-faint: #7b766d;
+
+    --hairline: #302e2a;
+    --hairline-strong: #423f39;
+
+    --form-error: #e08f78;
+
+    --overlay: rgba(0, 0, 0, 0.6);
+    --shadow-modal: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+
+    --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--ink);
+
+    // A brighter gold than the light-mode brand colour — the muted mustard
+    // reads as dull against a near-black canvas.
+    --logo-accent: #d4ac47;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Milestone tiers
+//
+// Each tier supplies three related values, and card CSS only ever reads the
+// generic names:
+//   --accent      the signal colour, used on rules and marks (never on text)
+//   --accent-soft a tint for the chip background
+//   --accent-ink  a darkened accent that clears 4.5:1 against --accent-soft,
+//                 so the chip label stays readable
+//
+// `fresh` is the default and is deliberately colourless — the point of the
+// scale is that colour arrives as the countup earns it.
+// ---------------------------------------------------------------------------
+
+[data-milestone] {
+  --accent: #a8a29a;
+  --accent-soft: #efece6;
+  --accent-ink: #5d5951;
+}
+
+[data-milestone='month'] {
+  --accent: #bfa980;
+  --accent-soft: #f2eadc;
+  --accent-ink: #6f5a2b;
+}
+
+[data-milestone='half'] {
+  --accent: #8a9a7b;
+  --accent-soft: #e9eee4;
+  --accent-ink: #465438;
+}
+
+[data-milestone='year'] {
+  --accent: #b08d33;
+  --accent-soft: #f5ebd3;
+  --accent-ink: #6d520c;
+}
+
+[data-milestone='deep'] {
+  --accent: #2f5d5b;
+  --accent-soft: #e0ebea;
+  --accent-ink: #1d3b39;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-milestone] {
+    --accent: #7c766d;
+    --accent-soft: #26241f;
+    --accent-ink: #b5b0a6;
+  }
+
+  [data-milestone='month'] {
+    --accent: #d4bc8e;
+    --accent-soft: #322c1d;
+    --accent-ink: #e2cea6;
+  }
+
+  [data-milestone='half'] {
+    --accent: #9db08c;
+    --accent-soft: #232a1f;
+    --accent-ink: #b6c7a6;
+  }
+
+  [data-milestone='year'] {
+    --accent: #d4ac47;
+    --accent-soft: #352c14;
+    --accent-ink: #e8c974;
+  }
+
+  [data-milestone='deep'] {
+    --accent: #5c9a96;
+    --accent-soft: #1a2c2b;
+    --accent-ink: #86bab6;
+  }
+}

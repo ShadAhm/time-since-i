@@ -11,10 +11,15 @@ import {
   differenceInYears,
   parseISO,
 } from 'date-fns';
+import { getMilestone } from './milestones';
 import './CountupCard.scss';
 
+function toDate(date: Date | string) {
+  return typeof date === 'string' ? parseISO(date) : date;
+}
+
 function formatDate(date: Date | string) {
-  const parsedDate = typeof date === 'string' ? parseISO(date) : date;
+  const parsedDate = toDate(date);
   const year = parsedDate.getFullYear();
   const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
   const day = String(parsedDate.getDate()).padStart(2, '0');
@@ -37,9 +42,7 @@ function CountupCard(input: CountupCardProps) {
     return () => clearInterval(interval);
   }, []);
 
-  const startDar = typeof input.startDate === 'string'
-    ? parseISO(input.startDate)
-    : input.startDate;
+  const startDar = toDate(input.startDate);
 
   const years = differenceInYears(now, startDar);
   const afterYears = addYears(startDar, years);
@@ -60,27 +63,44 @@ function CountupCard(input: CountupCardProps) {
   const minutes = differenceInMinutes(now, afterHours);
   const minuteWord = minutes === 1 ? 'minute' : 'minutes';
 
+  const milestone = getMilestone(startDar, now);
+
   const handleRemove = () => {
     input.onRemove(input.countdownId);
   };
 
   return (
-    <div className='card'>
-      <button type='button' className="cross-button" title='Remove card' onClick={handleRemove}><span aria-hidden="true">×</span></button>
-      <div className="card-body">
-        <p>It has been</p>
-        <div className='countdown-sentence'>
-          {years > 0 && <span className='countdown-unit'><span className="number">{years}</span> {yearWord} </span>}
-          {months > 0 && <span className='countdown-unit'><span className="number">{months}</span> {monthWord} </span>}
-          {days > 0 && <span className='countdown-unit'><span className="number">{days}</span> {dayWord} </span>}
-          {hours > 0 && <span className='countdown-unit'><span className="number">{hours}</span> {hourWord} </span>}
-          {minutes > 0 && <span className='countdown-unit'><span className="number">{minutes}</span> {minuteWord} </span>}
-          {minutes === 0 && <span className='countdown-unit'><span className="number">less than a minute</span></span>}
-        </div>
-        <p>since you {input.title}</p>
-        <p className="card-date">Started on {formatDate(input.startDate)}</p>
+    <article className='card' data-milestone={milestone.id}>
+      <div className='card-head'>
+        {milestone.label && <span className='card-tier'>{milestone.label}</span>}
+        <button
+          type='button'
+          className='card-remove'
+          title={`Remove "${input.title}"`}
+          onClick={handleRemove}
+        >
+          <span aria-hidden='true'>&times;</span>
+          <span className='visually-hidden'>Remove {input.title}</span>
+        </button>
       </div>
-    </div>
+
+      <div className='card-body'>
+        <p className='card-eyebrow'>It has been</p>
+        <p className='card-count'>
+          {years > 0 && <span className='count-unit'><span className='count-number'>{years}</span> {yearWord}</span>}
+          {months > 0 && <span className='count-unit'><span className='count-number'>{months}</span> {monthWord}</span>}
+          {days > 0 && <span className='count-unit'><span className='count-number'>{days}</span> {dayWord}</span>}
+          {hours > 0 && <span className='count-unit'><span className='count-number'>{hours}</span> {hourWord}</span>}
+          {minutes > 0 && <span className='count-unit'><span className='count-number'>{minutes}</span> {minuteWord}</span>}
+          {minutes === 0 && <span className='count-unit'><span className='count-number'>less than a minute</span></span>}
+        </p>
+        <h2 className='card-title'>since you {input.title}</h2>
+      </div>
+
+      <p className='card-date'>
+        Started <time dateTime={formatDate(input.startDate)}>{formatDate(input.startDate)}</time>
+      </p>
+    </article>
   );
 }
 
