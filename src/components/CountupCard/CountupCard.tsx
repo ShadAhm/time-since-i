@@ -13,10 +13,19 @@ import {
 } from 'date-fns';
 import './CountupCard.scss';
 
+function formatDate(date: Date | string) {
+  const parsedDate = typeof date === 'string' ? parseISO(date) : date;
+  const year = parsedDate.getFullYear();
+  const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+  const day = String(parsedDate.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
 interface CountupCardProps {
   countdownId: string;
   title: string;
-  startDate: Date;
+  startDate: Date | string;
   onRemove: (key: string) => void;
 }
 
@@ -69,6 +78,7 @@ function CountupCard(input: CountupCardProps) {
           {minutes === 0 && <span className='countdown-unit'><span className="number">less than a minute</span></span>}
         </div>
         <p>since you {input.title}</p>
+        <p className="card-date">Started on {formatDate(input.startDate)}</p>
       </div>
     </div>
   );
