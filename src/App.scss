@@ -1,13 +1,44 @@
-footer {
-  margin-top: 2rem;
+.site-header {
+  padding: var(--space-4) 0 var(--space-6);
+  text-align: center;
 }
 
+// The old stacked-shadow "sticker" logotype — brought back for personality.
+// Fill stays a constant white and the outline a constant dark charcoal
+// (rather than tokens like --ink that flip with the theme), because the
+// logo is a fixed brand mark: it should look the same wordmark in both
+// colour schemes. Only the gold layer and the rim shadow (which matches
+// the page background, same trick the original used) adapt per theme.
+.wordmark {
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: clamp(2rem, 7vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--logo-fill);
+  text-shadow: 1px 1px 1px var(--logo-outline), 2px 2px 1px var(--logo-outline),
+    3px 3px 1px var(--logo-accent), 4px 4px 1px var(--logo-accent),
+    5px 5px 1px var(--logo-outline), 6px 6px 1px var(--canvas);
+}
+
+footer {
+  flex-shrink: 0;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+
+  p {
+    margin: 0;
+  }
+}
+
+// Quiet footnote rather than an alert box — it is a standing caveat, not an
+// error, and it sat in a yellow panel loud enough to outrank the content.
 .page-warning {
-  margin-top: 0.75rem;
-  padding: 0.75rem 1rem;
-  border: 1px solid #d9a61a;
-  border-radius: 0.5rem;
-  background-color: #fff8d6;
-  color: #5c3d00;
-  font-size: 0.95rem;
+  margin-top: var(--space-2);
+  color: var(--ink-muted);
 }
