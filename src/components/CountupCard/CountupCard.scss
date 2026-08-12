@@ -33,20 +33,6 @@
   min-height: 22px;
 }
 
-.card-tier {
-  padding: 2px var(--space-2);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent-ink);
-  background-color: var(--accent-soft);
-  border-radius: var(--radius-pill);
-  transition: color var(--transition-accent),
-    background-color var(--transition-accent);
-}
-
 .card-remove {
   margin-left: auto;
   display: grid;

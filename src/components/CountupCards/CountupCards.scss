@@ -29,6 +29,26 @@
   color: var(--ink-muted);
 }
 
+@media (width < 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sort-field {
+    width: 100%;
+  }
+
+  .toolbar-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .toolbar-actions .button {
+    flex: 1 1 0;
+  }
+}
+
 .sort-select {
   padding: var(--space-2) var(--space-3);
   font: inherit;
