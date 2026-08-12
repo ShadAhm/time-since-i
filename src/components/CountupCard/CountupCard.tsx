@@ -72,7 +72,6 @@ function CountupCard(input: CountupCardProps) {
   return (
     <article className='card' data-milestone={milestone.id}>
       <div className='card-head'>
-        {milestone.label && <span className='card-tier'>{milestone.label}</span>}
         <button
           type='button'
           className='card-remove'
@@ -92,7 +91,7 @@ function CountupCard(input: CountupCardProps) {
           {days > 0 && <span className='count-unit'><span className='count-number'>{days}</span> {dayWord}</span>}
           {hours > 0 && <span className='count-unit'><span className='count-number'>{hours}</span> {hourWord}</span>}
           {minutes > 0 && <span className='count-unit'><span className='count-number'>{minutes}</span> {minuteWord}</span>}
-          {minutes === 0 && <span className='count-unit'><span className='count-number'>less than a minute</span></span>}
+          {years === 0 && months === 0 && days === 0 && hours === 0 && minutes === 0 && <span className='count-unit'><span className='count-number'>less than a minute</span></span>}
         </p>
         <h2 className='card-title'>since you {input.title}</h2>
       </div>
